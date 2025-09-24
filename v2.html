@@ -183,10 +183,11 @@
     <main class="main">
       <section id="intro" class="card">
         <p>Welcome to <strong>OST</strong>, your hub for viral internet stories, trending blogs, how-to guides, and the latest online tips.</p>
-        <div class="timerbox">
+        <div class="timerbox" id="timerBox">
     <h2>Redirecting safely…</h2>
     <p id="msg">Please wait</p>
     <div class="timer" id="countdown">20</div>
+    <a id="skip" class="skip" href="#">Skip now</a>
   </div>
       </section>
 
@@ -340,8 +341,7 @@
       }).join(''));
     }
 
-    // Check for hash
-    const hash = window.location.hash.substring(1); // remove leading "#"
+    const hash = window.location.hash.substring(1); 
     if(hash){
       const hashParams = new URLSearchParams(hash);
       const code = hashParams.get('code');
@@ -349,13 +349,14 @@
 
       if(code){
         try {
-          // Hide default page & show timerbox
-          document.getElementById('defaultPage').style.display = 'none';
-          document.getElementById('timerBox').style.display = 'block';
-
+          const defaultPage = document.getElementById('defaultPage');
+          const timerBox = document.getElementById('timerBox');
           const countdownEl = document.getElementById('countdown');
           const msgEl = document.getElementById('msg');
           const skipEl = document.getElementById('skip');
+
+          defaultPage.style.display = 'none';
+          timerBox.style.display = 'block';
 
           const decoded = b64DecodeUnicode(code);
           let url = decoded;
@@ -367,7 +368,6 @@
           }
 
           msgEl.innerHTML = 'Redirecting to safe destination in:';
-
           let timeLeft = Math.max(0, Math.floor(tParam));
           countdownEl.textContent = timeLeft;
           skipEl.href = url;
@@ -386,7 +386,7 @@
         }
       }
     }
-    // else: do nothing → default page stays visible
   </script>
 </body>
+
 </html>
