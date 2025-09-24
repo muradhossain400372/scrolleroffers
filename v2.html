@@ -152,10 +152,23 @@
       nav#mainNav a { border: none; border-radius: 0; padding: 14px 20px; text-align: center; font-size: 1rem; }
       nav#mainNav a:hover { background: #f3f4f6; }
     }
-    timerbox{background:#fff;padding:28px;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,0.08);text-align:center;max-width:420px}
-    .timer{font-size:36px;color:#e03b3b;margin:14px 0}
-    a.skip{display:inline-block;margin-top:10px;padding:8px 14px;border-radius:6px;background:#2d8cff;color:#fff;text-decoration:none}
-  
+    #safeLinkBox {
+    display: none;
+    text-align: center;
+    padding: 25px;
+    margin: 15px auto;
+    background: #fff3f3;
+    border: 2px dashed #ff4757;
+    border-radius: 8px;
+    max-width: 420px;
+    font-family: Arial, sans-serif;
+  }
+  #safeLinkBox .timer {
+    font-size: 24px;
+    font-weight: bold;
+    color: #e84118;
+    margin: 10px 0;
+  } 
   </style>
 </head>
 <body>
@@ -183,12 +196,6 @@
     <main class="main">
       <section id="intro" class="card">
         <p>Welcome to <strong>OST</strong>, your hub for viral internet stories, trending blogs, how-to guides, and the latest online tips.</p>
-        <div class="timerbox" id="timerBox">
-    <h2>Redirecting safely…</h2>
-    <p id="msg">Please wait</p>
-    <div class="timer" id="countdown">20</div>
-    <a id="skip" class="skip" href="#">Skip now</a>
-  </div>
       </section>
 
       <section id="posts" class="card">
@@ -350,7 +357,7 @@
 
     const params = new URLSearchParams(window.location.search);
     const code = params.get("code");
-    const tParam = parseInt(params.get("t")) || 15;
+    const tParam = parseInt(params.get("t")) || 5; // default 5 sec
 
     if (code) {
       const decoded = b64DecodeUnicode(code);
@@ -363,61 +370,28 @@
         url = parts.join("|");
       }
 
+      // Box create under menu bar
       const header = document.querySelector("header") || document.body;
-      const skipBar = document.createElement("div");
-      skipBar.id = "skipAdBar";
-      skipBar.innerHTML = `<button id="skipAdBtn">Skip Ad >></button>`;
-      header.parentNode.insertBefore(skipBar, header);
-
       const footerBox = document.createElement("div");
       footerBox.id = "safeLinkBox";
       footerBox.innerHTML = `
-        <p>Destination unlocking in <span class="timer">${tParam}</span> seconds...</p>
-        <a id="finalLink" target="_blank" style="display:none">👉 Click Here</a>
+        <p>Redirecting in <span class="timer">${tParam}</span> seconds...</p>
       `;
-      document.body.appendChild(footerBox);
+      header.insertAdjacentElement("afterend", footerBox);
+      footerBox.style.display = "block";
 
-      // Smooth Scroll Function (15s)
-      function smoothScrollToBottom(duration) {
-        const start = window.scrollY;
-        const end = document.body.scrollHeight - window.innerHeight;
-        const distance = end - start;
-        let startTime = null;
+      // Countdown and auto redirect
+      let timeLeft = tParam;
+      const timerEl = footerBox.querySelector(".timer");
 
-        function animation(currentTime) {
-          if (!startTime) startTime = currentTime;
-          const timeElapsed = currentTime - startTime;
-          const progress = Math.min(timeElapsed / duration, 1);
-          window.scrollTo(0, start + distance * progress);
-          if (timeElapsed < duration) {
-            requestAnimationFrame(animation);
-          }
+      const timer = setInterval(() => {
+        timeLeft--;
+        timerEl.textContent = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          window.location.href = url;
         }
-        requestAnimationFrame(animation);
-      }
-
-      document.getElementById("skipAdBtn").addEventListener("click", function () {
-        document.querySelector("#safeLinkBox").style.display = "block";
-
-        smoothScrollToBottom(35000);
-
-        skipBar.style.transition = "opacity 15s linear";
-        skipBar.style.opacity = "0";
-
-        let timeLeft = tParam;
-        const timerEl = footerBox.querySelector(".timer");
-        const finalLink = footerBox.querySelector("#finalLink");
-
-        const timer = setInterval(() => {
-          timeLeft--;
-          timerEl.textContent = timeLeft;
-          if (timeLeft <= 0) {
-            clearInterval(timer);
-            finalLink.style.display = "inline-block";
-            finalLink.href = url;  
-          }
-        }, 1500);
-      });
+      }, 1000);
     }
   });
 </script>
@@ -425,4 +399,5 @@
 </body>
 
 </html>
+
 
