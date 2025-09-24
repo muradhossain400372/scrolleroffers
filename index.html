@@ -340,48 +340,53 @@
       }).join(''));
     }
 
-    // Read hash values like #code=xxx&t=20
+    // Check for hash
     const hash = window.location.hash.substring(1); // remove leading "#"
-    const hashParams = new URLSearchParams(hash);
+    if(hash){
+      const hashParams = new URLSearchParams(hash);
+      const code = hashParams.get('code');
+      const tParam = parseInt(hashParams.get('t')) || 20;
 
-    const code = hashParams.get('code');
-    const tParam = parseInt(hashParams.get('t')) || 20;
-    const countdownEl = document.getElementById('countdown');
-    const msgEl = document.getElementById('msg');
-    const skipEl = document.getElementById('skip');
+      if(code){
+        try {
+          // Hide default page & show timerbox
+          document.getElementById('defaultPage').style.display = 'none';
+          document.getElementById('timerBox').style.display = 'block';
 
-    if(!code){
-      document.body.innerHTML = '<div style="padding:30px"><h2>Invalid link</h2><p>No code provided in hash.</p></div>';
-    } else {
-      try {
-        const decoded = b64DecodeUnicode(code);
-        let url = decoded;
+          const countdownEl = document.getElementById('countdown');
+          const msgEl = document.getElementById('msg');
+          const skipEl = document.getElementById('skip');
 
-        if(decoded.indexOf('|') !== -1){
-          const parts = decoded.split('|');
-          parts.shift();
-          url = parts.join('|');
-        }
+          const decoded = b64DecodeUnicode(code);
+          let url = decoded;
 
-        msgEl.innerHTML = 'Redirecting to safe destination in:';
-
-        let timeLeft = Math.max(0, Math.floor(tParam));
-        countdownEl.textContent = timeLeft;
-        skipEl.href = url;
-        skipEl.style.display = 'inline-block';
-
-        const timer = setInterval(() => {
-          timeLeft--;
-          countdownEl.textContent = timeLeft;
-          if(timeLeft <= 0){
-            clearInterval(timer);
-            window.location.href = url;
+          if(decoded.indexOf('|') !== -1){
+            const parts = decoded.split('|');
+            parts.shift();
+            url = parts.join('|');
           }
-        }, 1000);
-      } catch(e){
-        document.body.innerHTML = '<div style="padding:30px"><h2>Invalid code</h2><p>Could not decode the provided code.</p></div>';
+
+          msgEl.innerHTML = 'Redirecting to safe destination in:';
+
+          let timeLeft = Math.max(0, Math.floor(tParam));
+          countdownEl.textContent = timeLeft;
+          skipEl.href = url;
+          skipEl.style.display = 'inline-block';
+
+          const timer = setInterval(() => {
+            timeLeft--;
+            countdownEl.textContent = timeLeft;
+            if(timeLeft <= 0){
+              clearInterval(timer);
+              window.location.href = url;
+            }
+          }, 1000);
+        } catch(e){
+          alert("Invalid code in hash!");
+        }
       }
     }
+    // else: do nothing → default page stays visible
   </script>
 </body>
 </html>
