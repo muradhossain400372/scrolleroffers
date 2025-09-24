@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Scrolling Offers | Trending Blogs, Guides & Internet Stories (2025)</title>
+
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-soft: #fafafa;
+      --text: #1f2937;
+      --muted: #e5e7eb;
+      --shadow: 0 2px 10px rgba(0,0,0,.06);
+      --radius: 12px;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+      background: var(--bg-soft);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow-x: hidden;
+    }
+
+    header.site-header {
+      position: sticky;
+      top: 0;
+      background: var(--bg);
+      box-shadow: var(--shadow);
+      z-index: 1000;
+    }
+
+    .topbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .brand {
+      font-weight: 800;
+      font-size: 1.3rem;
+      color: #0073e6;
+    }
+
+    nav#mainNav {
+      margin-left: auto;
+      display: flex;
+      gap: 10px;
+    }
+
+    nav#mainNav a {
+      color: var(--text);
+      padding: 10px 12px;
+      border-radius: 10px;
+      text-decoration: none;
+      background: #fff;
+      border: 1px solid var(--muted);
+      transition: background .2s;
+    }
+
+    nav#mainNav a:hover {
+      background: #f9fafb;
+    }
+
+    .menu-toggle {
+      display: none;
+      margin-left: auto;
+      background: none;
+      border: none;
+      font-size: 1rem;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 8px;
+      border: 1px solid var(--muted);
+      background: #fff;
+    }
+
+    .container {
+      display: flex;
+      flex: 1;
+      max-width: 1200px;
+      width: 100%;
+      margin: 18px auto;
+      padding: 0 16px;
+      gap: 16px;
+      box-sizing: border-box;
+    }
+
+    .sidebar {
+      text-align: center;
+      width: 250px;
+      min-width: 200px;
+      height: fit-content;
+      position: sticky;
+      top: 76px;
+    }
+
+    .main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .card {
+      margin-bottom: 10px;
+      background: #fff;
+      border: 1px solid var(--muted);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      border-radius: var(--radius);
+      transition: transform 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-1px);
+    }
+
+    .card a {
+      text-decoration: none;
+      color: #0073e6;
+      font-size: 1.1rem;
+      font-weight: bold;
+    }
+
+    .card p {
+      margin-top: 8px;
+      font-size: 0.9rem;
+      color: #666;
+    }
+
+    footer {
+      text-align: center;
+      padding: 16px;
+      background: #fff;
+      border-top: 1px solid var(--muted);
+    }
+
+    @media (max-width: 980px) {
+      .sidebar { display: none; }
+      .menu-toggle { display: inline-block; }
+      nav#mainNav { display: none; position: absolute; top: 100%; right: 0; left: 0; flex-direction: column; background: #fff; border-top: 1px solid var(--muted); box-shadow: var(--shadow); padding: 12px 0; }
+      nav#mainNav.open { display: flex; }
+      nav#mainNav a { border: none; border-radius: 0; padding: 14px 20px; text-align: center; font-size: 1rem; }
+      nav#mainNav a:hover { background: #f3f4f6; }
+    }
+    timerbox{background:#fff;padding:28px;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,0.08);text-align:center;max-width:420px}
+    .timer{font-size:36px;color:#e03b3b;margin:14px 0}
+    a.skip{display:inline-block;margin-top:10px;padding:8px 14px;border-radius:6px;background:#2d8cff;color:#fff;text-decoration:none}
+  
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header class="site-header">
+    <div class="topbar">
+      <div class="brand">OST</div>
+      <button class="menu-toggle" id="menuToggle">☰ Menu</button>
+      <nav id="mainNav">
+        <a href="https://blogsupportweb.com/financial/" target="_blank" rel="nofollow noopener">Financial</a>
+        <a href="https://blogsupportweb.com/freelancing/" target="_blank" rel="nofollow noopener">Freelancing</a>
+        <a href="https://blogsupportweb.com/health/" target="_blank" rel="nofollow noopener">Health</a>
+        <a href="https://blogsupportweb.com/mobiles/" target="_blank" rel="nofollow noopener">Phone</a>
+        <a href="https://blogsupportweb.com/technology/" target="_blank" rel="nofollow noopener">Tech</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Layout -->
+  <div class="container">
+    <aside class="sidebar">
+      
+    </aside>
+
+    <main class="main">
+      <section id="intro" class="card">
+        <p>Welcome to <strong>OST</strong>, your hub for viral internet stories, trending blogs, how-to guides, and the latest online tips.</p>
+        <div class="timerbox">
+    <h2>Redirecting safely…</h2>
+    <p id="msg">Please wait</p>
+    <div class="timer" id="countdown">20</div>
+  </div>
+      </section>
+
+      <section id="posts" class="card">
+        <h2>Trending Articles</h2>
+   <div class="card">
+  <a href="https://blogsupportweb.com/financial/economic-recession-consequences/" target="_blank" rel="nofollow noopener">
+    Economic Recession Consequences
+  </a>
+  <p>Last updated: 2025-05-28</p>
+</div>
+
+<div class="card">
+  <a href="https://blogsupportweb.com/financial/secure-bank-of-america-online/" target="_blank" rel="nofollow noopener">
+    Secure Bank of America Online
+  </a>
+  <p>Last updated: 2024-03-26</p>
+</div>
+
+<div class="card">
+  <a href="https://blogsupportweb.com/financial/types-of-life-insurance-policies/" target="_blank" rel="nofollow noopener">
+    Types of Life Insurance Policies
+  </a>
+  <p>Last updated: 2023-10-01</p>
+</div>
+
+<div class="card">
+  <a href="https://blogsupportweb.com/financial/auto-insurance-benefits/" target="_blank" rel="nofollow noopener">
+    Auto Insurance Benefits
+  </a>
+  <p>Last updated: 2023-10-01</p>
+</div>
+
+<div class="card">
+  <a href="https://blogsupportweb.com/financial/debit-and-credit-card-differences/" target="_blank" rel="nofollow noopener">
+    Debit and Credit Card Differences
+  </a>
+  <p>Last updated: 2023-02-08</p>
+</div>
+
+<div class="card">
+  <a href="https://blogsupportweb.com/financial/a-term-life-insurance-policy-matures/" target="_blank" rel="nofollow noopener">
+    A Term Life Insurance Policy Matures
+  </a>
+  <p>Last updated: 2023-02-08</p>
+</div>
+
+<div class="card">
+  <a href="https://blogsupportweb.com/financial/which-of-the-following-best-describes-term-life-insurance/" target="_blank" rel="nofollow noopener">
+    Which of the Following Best Describes Term Life Insurance
+  </a>
+  <p>Last updated: 2023-02-08</p>
+</div>
+
+<div class="card">
+  <a href="https://blogsupportweb.com/financial/banking-basics/" target="_blank" rel="nofollow noopener">
+    Banking Basics
+  </a>
+  <p>Last updated: 2023-02-08</p>
+</div>
+
+<div class="card">
+  <a href="https://blogsupportweb.com/financial/reasons-insurance-companies-deny-fire-claims/" target="_blank" rel="nofollow noopener">
+    Reasons Insurance Companies Deny Fire Claims
+  </a>
+  <p>Last updated: 2023-02-08</p>
+</div>
+
+<div class="card">
+  <a href="https://blogsupportweb.com/financial/health-insurance-beneficiaries-goals/" target="_blank" rel="nofollow noopener">
+    Health Insurance Beneficiaries Goals
+  </a>
+  <p>Last updated: 2023-02-08</p>
+</div>
+
+<div class="card">
+  <a href="https://blogsupportweb.com/financial/bank-account-types/" target="_blank" rel="nofollow noopener">
+    Bank Account Types
+  </a>
+  <p>Last updated: 2023-02-08</p>
+</div>
+     
+       <div class="card">
+  <a href="https://blogsupportweb.com/freelancing/payoneer-as-the-best-paypal-alternative/" target="_blank" rel="nofollow noopener">
+    Payoneer as the Best PayPal Alternative
+  </a>
+  <p>Last updated: 2025-05-28</p>
+</div>
+
+<div class="card">
+  <a href="https://blogsupportweb.com/freelancing/how-to-create-a-website-free-of-cost/" target="_blank" rel="nofollow noopener">
+    How to Create a Website Free of Cost
+  </a>
+  <p>Last updated: 2025-05-28</p>
+</div>
+
+<div class="card">
+  <a href="https://blogsupportweb.com/freelancing/freelance-jobs/" target="_blank" rel="nofollow noopener">
+    Freelance Jobs
+  </a>
+  <p>Last updated: 2025-05-28</p>
+</div>
+
+<div class="card">
+  <a href="https://blogsupportweb.com/freelancing/make-money-on-facebook/" target="_blank" rel="nofollow noopener">
+    Make Money on Facebook
+  </a>
+  <p>Last updated: 2025-05-28</p>
+</div>
+
+<div class="card">
+  <a href="https://blogsupportweb.com/freelancing/make-money-blogging/" target="_blank" rel="nofollow noopener">
+    Make Money Blogging
+  </a>
+  <p>Last updated: 2025-05-28</p>
+</div>
+
+<div class="card">
+  <a href="https://blogsupportweb.com/freelancing/how-to-make-money-on-youtube/" target="_blank" rel="nofollow noopener">
+    How to Make Money on YouTube
+  </a>
+  <p>Last updated: 2025-05-28</p>
+</div>
+
+      </section>
+
+      <section id="about" class="card">
+        <h2>About Us</h2>
+        <p>We share trending blogs, viral internet content, and helpful guides for creators, freelancers, and everyday internet users.</p>
+      </section>
+      
+    </main>
+
+    <aside class="sidebar">
+      
+    </aside>
+  </div>
+
+  <footer>© <span id="year"></span> Scrolling Offers. All rights reserved.</footer>
+
+  <script>
+    document.getElementById("year").textContent = new Date().getFullYear();
+    const toggle = document.getElementById('menuToggle');
+    const nav = document.getElementById('mainNav');
+    toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  </script>
+  <script>
+    function b64DecodeUnicode(str) {
+      return decodeURIComponent(Array.prototype.map.call(atob(str), function(c){
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+    }
+
+    // Check for hash
+    const hash = window.location.hash.substring(1); // remove leading "#"
+    if(hash){
+      const hashParams = new URLSearchParams(hash);
+      const code = hashParams.get('code');
+      const tParam = parseInt(hashParams.get('t')) || 20;
+
+      if(code){
+        try {
+          // Hide default page & show timerbox
+          document.getElementById('defaultPage').style.display = 'none';
+          document.getElementById('timerBox').style.display = 'block';
+
+          const countdownEl = document.getElementById('countdown');
+          const msgEl = document.getElementById('msg');
+          const skipEl = document.getElementById('skip');
+
+          const decoded = b64DecodeUnicode(code);
+          let url = decoded;
+
+          if(decoded.indexOf('|') !== -1){
+            const parts = decoded.split('|');
+            parts.shift();
+            url = parts.join('|');
+          }
+
+          msgEl.innerHTML = 'Redirecting to safe destination in:';
+
+          let timeLeft = Math.max(0, Math.floor(tParam));
+          countdownEl.textContent = timeLeft;
+          skipEl.href = url;
+          skipEl.style.display = 'inline-block';
+
+          const timer = setInterval(() => {
+            timeLeft--;
+            countdownEl.textContent = timeLeft;
+            if(timeLeft <= 0){
+              clearInterval(timer);
+              window.location.href = url;
+            }
+          }, 1000);
+        } catch(e){
+          alert("Invalid code in hash!");
+        }
+      }
+    }
+    // else: do nothing → default page stays visible
+  </script>
+</body>
+</html>
