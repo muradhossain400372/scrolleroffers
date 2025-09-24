@@ -335,58 +335,94 @@
     toggle.addEventListener('click', () => nav.classList.toggle('open'));
   </script>
   <script>
+  document.addEventListener("DOMContentLoaded", function () {
     function b64DecodeUnicode(str) {
-      return decodeURIComponent(Array.prototype.map.call(atob(str), function(c){
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-      }).join(''));
-    }
-
-    const hash = window.location.hash.substring(1); 
-    if(hash){
-      const hashParams = new URLSearchParams(hash);
-      const code = hashParams.get('code');
-      const tParam = parseInt(hashParams.get('t')) || 20;
-
-      if(code){
-        try {
-          const defaultPage = document.getElementById('defaultPage');
-          const timerBox = document.getElementById('timerBox');
-          const countdownEl = document.getElementById('countdown');
-          const msgEl = document.getElementById('msg');
-          const skipEl = document.getElementById('skip');
-
-          defaultPage.style.display = 'none';
-          timerBox.style.display = 'block';
-
-          const decoded = b64DecodeUnicode(code);
-          let url = decoded;
-
-          if(decoded.indexOf('|') !== -1){
-            const parts = decoded.split('|');
-            parts.shift();
-            url = parts.join('|');
-          }
-
-          msgEl.innerHTML = 'Redirecting to safe destination in:';
-          let timeLeft = Math.max(0, Math.floor(tParam));
-          countdownEl.textContent = timeLeft;
-          skipEl.href = url;
-          skipEl.style.display = 'inline-block';
-
-          const timer = setInterval(() => {
-            timeLeft--;
-            countdownEl.textContent = timeLeft;
-            if(timeLeft <= 0){
-              clearInterval(timer);
-              window.location.href = url;
-            }
-          }, 1000);
-        } catch(e){
-          alert("Invalid code in hash!");
-        }
+      try {
+        return decodeURIComponent(
+          Array.prototype.map.call(atob(str), function (c) {
+            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+          }).join("")
+        );
+      } catch (e) {
+        return null;
       }
     }
-  </script>
+
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    const tParam = parseInt(params.get("t")) || 15;
+
+    if (code) {
+      const decoded = b64DecodeUnicode(code);
+      if (!decoded) return;
+
+      let url = decoded;
+      if (decoded.indexOf("|") !== -1) {
+        const parts = decoded.split("|");
+        parts.shift();
+        url = parts.join("|");
+      }
+
+      const header = document.querySelector("header") || document.body;
+      const skipBar = document.createElement("div");
+      skipBar.id = "skipAdBar";
+      skipBar.innerHTML = `<button id="skipAdBtn">Skip Ad >></button>`;
+      header.parentNode.insertBefore(skipBar, header);
+
+      const footerBox = document.createElement("div");
+      footerBox.id = "safeLinkBox";
+      footerBox.innerHTML = `
+        <p>Destination unlocking in <span class="timer">${tParam}</span> seconds...</p>
+        <a id="finalLink" target="_blank" style="display:none">👉 Click Here</a>
+      `;
+      document.body.appendChild(footerBox);
+
+      // Smooth Scroll Function (15s)
+      function smoothScrollToBottom(duration) {
+        const start = window.scrollY;
+        const end = document.body.scrollHeight - window.innerHeight;
+        const distance = end - start;
+        let startTime = null;
+
+        function animation(currentTime) {
+          if (!startTime) startTime = currentTime;
+          const timeElapsed = currentTime - startTime;
+          const progress = Math.min(timeElapsed / duration, 1);
+          window.scrollTo(0, start + distance * progress);
+          if (timeElapsed < duration) {
+            requestAnimationFrame(animation);
+          }
+        }
+        requestAnimationFrame(animation);
+      }
+
+      document.getElementById("skipAdBtn").addEventListener("click", function () {
+        document.querySelector("#safeLinkBox").style.display = "block";
+
+        smoothScrollToBottom(35000);
+
+        skipBar.style.transition = "opacity 15s linear";
+        skipBar.style.opacity = "0";
+
+        let timeLeft = tParam;
+        const timerEl = footerBox.querySelector(".timer");
+        const finalLink = footerBox.querySelector("#finalLink");
+
+        const timer = setInterval(() => {
+          timeLeft--;
+          timerEl.textContent = timeLeft;
+          if (timeLeft <= 0) {
+            clearInterval(timer);
+            finalLink.style.display = "inline-block";
+            finalLink.href = url;  
+          }
+        }, 1500);
+      });
+    }
+  });
+</script>
+
 </body>
 
 </html>
+
