@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Batch Safe Link Generator</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#f5f7fb;padding:30px}
+    .card{max-width:900px;margin:0 auto;background:#fff;padding:20px;border-radius:8px;box-shadow:0 6px 20px rgba(0,0,0,0.08)}
+    textarea{width:100%;min-height:200px;padding:10px;border-radius:6px;border:1px solid #ddd;resize:vertical}
+    input,button,select{padding:10px;border-radius:6px;border:1px solid #ccc}
+    .row{display:flex;gap:10px;flex-wrap:wrap;margin-top:10px}
+    .small{width:120px}
+    .result{white-space:pre-wrap;background:#fafafa;padding:12px;border-radius:6px;border:1px dashed #e6e6e6;max-height:300px;overflow:auto}
+    .actions{display:flex;gap:10px;margin-top:12px;flex-wrap:wrap}
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>Batch Safe Link Generator — Generate Thousands of Links at Once</h2>
+    <p>Enter one URL per line or one URL per cell in a CSV file. Then click <b>Convert All</b>.</p>
+
+    <label><strong>Input (one URL per line):</strong></label>
+    <textarea id="inputArea" placeholder="https://example.com/page1
+https://example.org/another
+..."></textarea>
+
+    <div class="row">
+      <div>
+        <label>Redirect page path (your redirect.html URL):</label><br/>
+        <input id="redirectBase" type="text" value="" placeholder="Example: https://yourdomain.com/redirect.html"/>
+      </div>
+
+      <div>
+        <label>Use salt (optional):</label><br/>
+        <input id="salt" type="text" placeholder="Example: mysalt123 (optional)"/>
+      </div>
+
+      <div>
+        <label>Timer (seconds):</label><br/>
+        <input id="timer" class="small" type="number" value="20" min="0"/>
+      </div>
+    </div>
+
+    <div class="actions">
+      <button onclick="convertAll()">Convert All</button>
+      <button onclick="clearAll()">Clear</button>
+      <input id="fileInput" type="file" accept=".txt,.csv" style="display:none" onchange="loadFile(event)"/>
+      <button onclick="document.getElementById('fileInput').click()">Load .txt/.csv</button>
+      <button onclick="downloadResult('csv')">Download CSV</button>
+      <button onclick="downloadResult('txt')">Download TXT</button>
+      <button onclick="copyResult()">Copy All</button>
+    </div>
+
+    <h3>Results</h3>
+    <div id="stats"></div>
+    <div class="result" id="resultBox"></div>
+  </div>
+
+  <script>
+    // Unicode-safe Base64 encode/decode
+    function b64EncodeUnicode(str) {
+      return btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+        function(match, p1){ return String.fromCharCode('0x' + p1); }));
+    }
+    function b64DecodeUnicode(str) {
+      return decodeURIComponent(Array.prototype.map.call(atob(str), function(c){
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+    }
+
+    function normalizeUrl(u){
+      u = u.trim();
+      if(!u) return '';
+      // if scheme missing, assume https
+      if(!/^https?:\/\//i.test(u)) u = 'https://' + u;
+      return u;
+    }
+
+    function convertAll(){
+      const raw = document.getElementById('inputArea').value;
+      const redirectBase = document.getElementById('redirectBase').value.trim();
+      if(!redirectBase){
+        alert('Please provide the Redirect page path (Example: https://yourdomain.com/redirect.html)');
+        return;
+      }
+
+      const salt = document.getElementById('salt').value || '';
+      const timer = parseInt(document.getElementById('timer').value) || 20;
+
+      const lines = raw.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      if(lines.length === 0){
+        alert('No URLs found.');
+        return;
+      }
+
+      const results = [];
+      const bad = [];
+      for(const line of lines){
+        const url = normalizeUrl(line);
+        try {
+          // create payload: if salt provided, prefix with salt + '|' to make decode require same salt
+          const payload = salt ? salt + '|' + url : url;
+          const code = b64EncodeUnicode(payload);
+          const safe = redirectBase + '?code=' + encodeURIComponent(code) + '&t=' + encodeURIComponent(timer);
+          results.push({original: url, safe});
+        } catch(e){
+          bad.push(line);
+        }
+      }
+
+      // show stats + results
+      document.getElementById('stats').innerText = `Converted: ${results.length}  |  Failed: ${bad.length}`;
+      const out = results.map(r => r.safe).join('\n');
+      document.getElementById('resultBox').textContent = out;
+
+      // keep results in memory for download/copy
+      window._batchResults = results;
+    }
+
+    function clearAll(){
+      document.getElementById('inputArea').value = '';
+      document.getElementById('resultBox').textContent = '';
+      document.getElementById('stats').innerText = '';
+      window._batchResults = null;
+    }
+
+    function loadFile(evt){
+      const f = evt.target.files[0];
+      if(!f) return;
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const text = e.target.result;
+        // put into textarea
+        document.getElementById('inputArea').value = text;
+      };
+      reader.readAsText(f);
+    }
+
+    function downloadResult(type){
+      const res = window._batchResults;
+      if(!res || res.length === 0){ alert('No results to download. Convert first.'); return; }
+
+      if(type === 'csv'){
+        let csv = 'original,safe_link\n';
+        csv += res.map(r => `"${r.original.replace(/"/g,'""')}","${r.safe.replace(/"/g,'""')}"`).join('\n');
+        const blob = new Blob([csv], {type:'text/csv'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'safe_links.csv';
+        a.click();
+        URL.revokeObjectURL(url);
+      } else {
+        const txt = res.map(r => r.safe).join('\n');
+        const blob = new Blob([txt], {type:'text/plain'});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'safe_links.txt';
+        a.click();
+        URL.revokeObjectURL(url);
+      }
+    }
+
+    function copyResult(){
+      const text = document.getElementById('resultBox').textContent;
+      if(!text){ alert('No result to copy.'); return; }
+      navigator.clipboard.writeText(text).then(()=> alert('Copied to clipboard ✅'), ()=> alert('Copy failed ☹️'));
+    }
+  </script>
+</body>
+</html>
