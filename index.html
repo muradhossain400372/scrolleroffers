@@ -152,10 +152,23 @@
       nav#mainNav a { border: none; border-radius: 0; padding: 14px 20px; text-align: center; font-size: 1rem; }
       nav#mainNav a:hover { background: #f3f4f6; }
     }
-    timerbox{background:#fff;padding:28px;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,0.08);text-align:center;max-width:420px}
-    .timer{font-size:36px;color:#e03b3b;margin:14px 0}
-    a.skip{display:inline-block;margin-top:10px;padding:8px 14px;border-radius:6px;background:#2d8cff;color:#fff;text-decoration:none}
-  
+    #safeLinkBox {
+    display: none;
+    text-align: center;
+    padding: 25px;
+    margin: 15px auto;
+    background: #fff3f3;
+    border: 2px dashed #ff4757;
+    border-radius: 8px;
+    max-width: 420px;
+    font-family: Arial, sans-serif;
+  }
+  #safeLinkBox .timer {
+    font-size: 24px;
+    font-weight: bold;
+    color: #e84118;
+    margin: 10px 0;
+  } 
   </style>
 </head>
 <body>
@@ -183,11 +196,6 @@
     <main class="main">
       <section id="intro" class="card">
         <p>Welcome to <strong>OST</strong>, your hub for viral internet stories, trending blogs, how-to guides, and the latest online tips.</p>
-        <div class="timerbox">
-    <h2>Redirecting safely…</h2>
-    <p id="msg">Please wait</p>
-    <div class="timer" id="countdown">20</div>
-  </div>
       </section>
 
       <section id="posts" class="card">
@@ -334,59 +342,60 @@
     toggle.addEventListener('click', () => nav.classList.toggle('open'));
   </script>
   <script>
+  document.addEventListener("DOMContentLoaded", function () {
     function b64DecodeUnicode(str) {
-      return decodeURIComponent(Array.prototype.map.call(atob(str), function(c){
-        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-      }).join(''));
-    }
-
-    // Check for hash
-    const hash = window.location.hash.substring(1); // remove leading "#"
-    if(hash){
-      const hashParams = new URLSearchParams(hash);
-      const code = hashParams.get('code');
-      const tParam = parseInt(hashParams.get('t')) || 20;
-
-      if(code){
-        try {
-          // Hide default page & show timerbox
-          document.getElementById('defaultPage').style.display = 'none';
-          document.getElementById('timerBox').style.display = 'block';
-
-          const countdownEl = document.getElementById('countdown');
-          const msgEl = document.getElementById('msg');
-          const skipEl = document.getElementById('skip');
-
-          const decoded = b64DecodeUnicode(code);
-          let url = decoded;
-
-          if(decoded.indexOf('|') !== -1){
-            const parts = decoded.split('|');
-            parts.shift();
-            url = parts.join('|');
-          }
-
-          msgEl.innerHTML = 'Redirecting to safe destination in:';
-
-          let timeLeft = Math.max(0, Math.floor(tParam));
-          countdownEl.textContent = timeLeft;
-          skipEl.href = url;
-          skipEl.style.display = 'inline-block';
-
-          const timer = setInterval(() => {
-            timeLeft--;
-            countdownEl.textContent = timeLeft;
-            if(timeLeft <= 0){
-              clearInterval(timer);
-              window.location.href = url;
-            }
-          }, 1000);
-        } catch(e){
-          alert("Invalid code in hash!");
-        }
+      try {
+        return decodeURIComponent(
+          Array.prototype.map.call(atob(str), function (c) {
+            return "%" + ("00" + c.charCodeAt(0).toString(16)).slice(-2);
+          }).join("")
+        );
+      } catch (e) {
+        return null;
       }
     }
-    // else: do nothing → default page stays visible
-  </script>
+
+    const params = new URLSearchParams(window.location.search);
+    const code = params.get("code");
+    const tParam = parseInt(params.get("t")) || 5; // default 5 sec
+
+    if (code) {
+      const decoded = b64DecodeUnicode(code);
+      if (!decoded) return;
+
+      let url = decoded;
+      if (decoded.indexOf("|") !== -1) {
+        const parts = decoded.split("|");
+        parts.shift();
+        url = parts.join("|");
+      }
+
+      // Box create under menu bar
+      const header = document.querySelector("header") || document.body;
+      const footerBox = document.createElement("div");
+      footerBox.id = "safeLinkBox";
+      footerBox.innerHTML = `
+        <p>Redirecting in <span class="timer">${tParam}</span> seconds...</p>
+      `;
+      header.insertAdjacentElement("afterend", footerBox);
+      footerBox.style.display = "block";
+
+      // Countdown and auto redirect
+      let timeLeft = tParam;
+      const timerEl = footerBox.querySelector(".timer");
+
+      const timer = setInterval(() => {
+        timeLeft--;
+        timerEl.textContent = timeLeft;
+        if (timeLeft <= 0) {
+          clearInterval(timer);
+          window.location.href = url;
+        }
+      }, 1000);
+    }
+  });
+</script>
+
 </body>
+
 </html>
