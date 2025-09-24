@@ -152,6 +152,10 @@
       nav#mainNav a { border: none; border-radius: 0; padding: 14px 20px; text-align: center; font-size: 1rem; }
       nav#mainNav a:hover { background: #f3f4f6; }
     }
+    timerbox{background:#fff;padding:28px;border-radius:10px;box-shadow:0 8px 30px rgba(0,0,0,0.08);text-align:center;max-width:420px}
+    .timer{font-size:36px;color:#e03b3b;margin:14px 0}
+    a.skip{display:inline-block;margin-top:10px;padding:8px 14px;border-radius:6px;background:#2d8cff;color:#fff;text-decoration:none}
+  
   </style>
 </head>
 <body>
@@ -179,6 +183,11 @@
     <main class="main">
       <section id="intro" class="card">
         <p>Welcome to <strong>OST</strong>, your hub for viral internet stories, trending blogs, how-to guides, and the latest online tips.</p>
+        <div class="timerbox">
+    <h2>Redirecting safely…</h2>
+    <p id="msg">Please wait</p>
+    <div class="timer" id="countdown">20</div>
+  </div>
       </section>
 
       <section id="posts" class="card">
@@ -323,6 +332,56 @@
     const toggle = document.getElementById('menuToggle');
     const nav = document.getElementById('mainNav');
     toggle.addEventListener('click', () => nav.classList.toggle('open'));
+  </script>
+  <script>
+    function b64DecodeUnicode(str) {
+      return decodeURIComponent(Array.prototype.map.call(atob(str), function(c){
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+      }).join(''));
+    }
+
+    // Read hash values like #code=xxx&t=20
+    const hash = window.location.hash.substring(1); // remove leading "#"
+    const hashParams = new URLSearchParams(hash);
+
+    const code = hashParams.get('code');
+    const tParam = parseInt(hashParams.get('t')) || 20;
+    const countdownEl = document.getElementById('countdown');
+    const msgEl = document.getElementById('msg');
+    const skipEl = document.getElementById('skip');
+
+    if(!code){
+      document.body.innerHTML = '<div style="padding:30px"><h2>Invalid link</h2><p>No code provided in hash.</p></div>';
+    } else {
+      try {
+        const decoded = b64DecodeUnicode(code);
+        let url = decoded;
+
+        if(decoded.indexOf('|') !== -1){
+          const parts = decoded.split('|');
+          parts.shift();
+          url = parts.join('|');
+        }
+
+        msgEl.innerHTML = 'Redirecting to safe destination in:';
+
+        let timeLeft = Math.max(0, Math.floor(tParam));
+        countdownEl.textContent = timeLeft;
+        skipEl.href = url;
+        skipEl.style.display = 'inline-block';
+
+        const timer = setInterval(() => {
+          timeLeft--;
+          countdownEl.textContent = timeLeft;
+          if(timeLeft <= 0){
+            clearInterval(timer);
+            window.location.href = url;
+          }
+        }, 1000);
+      } catch(e){
+        document.body.innerHTML = '<div style="padding:30px"><h2>Invalid code</h2><p>Could not decode the provided code.</p></div>';
+      }
+    }
   </script>
 </body>
 </html>
