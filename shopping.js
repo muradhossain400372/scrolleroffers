@@ -1,0 +1,510 @@
+const htmlCode = `
+<!DOCTYPE html>
+<html lang="en">
+<link href='https://fonts.googleapis.com/css?family=Poppins' rel='stylesheet'>
+<div class="slider-container" style="margin-top:5px;">
+
+  <div class="slider-track">
+    
+    <div class="slider-item">
+      <div class="product-image-container">
+      <div class="product-image">
+          <div class="adflexbox" id="acd1398a66e389e6dde5f0abb57bf036b"></div>
+<script>
+    (function(d, w) {
+        if (!w.adflex) {
+            var s = d.createElement("script");
+            s.type = "text/javascript";
+            s.src = "https://console.adscroller.com/loader.js";
+            d.getElementsByTagName('head')[0].appendChild(s);
+            w.adflex = {host: '//console.adscroller.com'};
+        }
+    })(document, window);
+</script>
+          </div>
+        </div>
+      
+      <div class="star-rating">
+        <label for="product1-star">&#9733;</label>
+        <label for="product1-star">&#9733;</label>
+        <label for="product1-star">&#9733;</label>
+        <label for="product1-star">&#9733;</label>
+        <label for="product1-star">&#9733;</label>
+      </div>
+      
+      <div class="product-image-container">
+      <div class="product-image">
+          <div class="adflexbox" id="a72cdc280fedc18cd76cc6c0aa3e0d749"></div>
+<script>
+    (function(d, w) {
+        if (!w.adflex) {
+            var s = d.createElement("script");
+            s.type = "text/javascript";
+            s.src = "https://console.adscroller.com/loader.js";
+            d.getElementsByTagName('head')[0].appendChild(s);
+            w.adflex = {host: '//console.adscroller.com'};
+        }
+    })(document, window);
+</script>
+          </div>
+        </div>
+      
+      <div class="star-rating">
+        <label for="product1-star">&#9733;</label>
+        <label for="product1-star">&#9733;</label>
+        <label for="product1-star">&#9733;</label>
+        <label for="product1-star">&#9733;</label>
+        <label for="product1-star">&#9734;</label>
+      </div>
+      
+
+    </div>
+    <div class="slider-item">
+      <div class="product-image-container">
+      <div class="product-image">
+          <div class="adflexbox" id="a523a4fd70345acb597cd438c43bd2167"></div>
+<script>
+    (function(d, w) {
+        if (!w.adflex) {
+            var s = d.createElement("script");
+            s.type = "text/javascript";
+            s.src = "https://console.adscroller.com/loader.js";
+            d.getElementsByTagName('head')[0].appendChild(s);
+            w.adflex = {host: '//console.adscroller.com'};
+        }
+    })(document, window);
+</script>
+          </div>
+        </div>
+      
+      <div class="star-rating">
+        <label for="product2-star">&#9733;</label>
+        <label for="product2-star">&#9733;</label>
+        <label for="product2-star">&#9733;</label>
+        <label for="product2-star">&#9733;</label>
+        <label for="product2-star">&#9734;</label>
+      </div>
+      
+      
+      <div class="product-image-container">
+      <div class="product-image">
+          <div class="adflexbox" id="ab094b2e695a6e5f7ccd7ad4b24f03d02"></div>
+<script>
+    (function(d, w) {
+        if (!w.adflex) {
+            var s = d.createElement("script");
+            s.type = "text/javascript";
+            s.src = "https://console.adscroller.com/loader.js";
+            d.getElementsByTagName('head')[0].appendChild(s);
+            w.adflex = {host: '//console.adscroller.com'};
+        }
+    })(document, window);
+</script>
+          </div>
+        </div>
+      
+      <div class="star-rating">
+        <label for="product2-star">&#9733;</label>
+        <label for="product2-star">&#9733;</label>
+        <label for="product2-star">&#9733;</label>
+        <label for="product2-star">&#9733;</label>
+        <label for="product2-star">&#9734;</label>
+      </div>
+      
+      
+    </div>
+    <div class="slider-item">
+      <div class="product-image-container">
+      <div class="product-image">
+         <div class="adflexbox" id="aca878d4825fdac2d9e79f96aa902cd0a"></div>
+<script>
+    (function(d, w) {
+        if (!w.adflex) {
+            var s = d.createElement("script");
+            s.type = "text/javascript";
+            s.src = "https://console.adscroller.com/loader.js";
+            d.getElementsByTagName('head')[0].appendChild(s);
+            w.adflex = {host: '//console.adscroller.com'};
+        }
+    })(document, window);
+</script>
+           </div>
+        </div>
+      
+      <div class="star-rating">
+        <label for="product3-star">&#9733;</label>
+        <label for="product3-star">&#9733;</label>
+        <label for="product3-star">&#9733;</label>
+        <label for="product3-star">&#9733;</label>
+        <label for="product3-star">&#9733;</label>
+      </div>
+      
+      
+      <div class="product-image-container">
+      <div class="product-image">
+          <div class="adflexbox" id="a277388e8b84426cfcb36cf09c076c968"></div>
+<script>
+    (function(d, w) {
+        if (!w.adflex) {
+            var s = d.createElement("script");
+            s.type = "text/javascript";
+            s.src = "https://console.adscroller.com/loader.js";
+            d.getElementsByTagName('head')[0].appendChild(s);
+            w.adflex = {host: '//console.adscroller.com'};
+        }
+    })(document, window);
+</script>
+           </div>
+        </div>
+      
+      <div class="star-rating">
+        <label for="product3-star">&#9733;</label>
+        <label for="product3-star">&#9733;</label>
+        <label for="product3-star">&#9733;</label>
+        <label for="product3-star">&#9733;</label>
+        <label for="product3-star">&#9734;</label>
+      </div>
+      
+      
+      
+    </div>
+    <div class="slider-item">
+      <div class="product-image-container">
+      <div class="product-image">
+          <div class="adflexbox" id="a46c2bba5fb695402afeb08b3b22dad5f"></div>
+<script>
+    (function(d, w) {
+        if (!w.adflex) {
+            var s = d.createElement("script");
+            s.type = "text/javascript";
+            s.src = "https://console.adscroller.com/loader.js";
+            d.getElementsByTagName('head')[0].appendChild(s);
+            w.adflex = {host: '//console.adscroller.com'};
+        }
+    })(document, window);
+</script>
+          </div>
+        </div>
+      
+      <div class="star-rating">
+        <label for="product1-star">&#9733;</label>
+        <label for="product1-star">&#9733;</label>
+        <label for="product1-star">&#9733;</label>
+        <label for="product1-star">&#9733;</label>
+        <label for="product1-star">&#9734;</label>
+      </div>
+      
+      
+      <div class="product-image-container">
+      <div class="product-image">
+          <div class="adflexbox" id="a8e6c669660d1cb47e4a1474c2217402f"></div>
+<script>
+    (function(d, w) {
+        if (!w.adflex) {
+            var s = d.createElement("script");
+            s.type = "text/javascript";
+            s.src = "https://console.adscroller.com/loader.js";
+            d.getElementsByTagName('head')[0].appendChild(s);
+            w.adflex = {host: '//console.adscroller.com'};
+        }
+    })(document, window);
+</script>
+          </div>
+        </div>
+      
+      <div class="star-rating">
+        <label for="product1-star">&#9733;</label>
+        <label for="product1-star">&#9733;</label>
+        <label for="product1-star">&#9733;</label>
+        <label for="product1-star">&#9733;</label>
+        <label for="product1-star">&#9733;</label>
+      </div>
+      
+      
+    </div>
+    <div class="slider-item">
+      <div class="product-image-container">
+      <div class="product-image">
+          <div class="adflexbox" id="af3c7da3e4e745bdbbf6028738aaf4b34"></div>
+<script>
+    (function(d, w) {
+        if (!w.adflex) {
+            var s = d.createElement("script");
+            s.type = "text/javascript";
+            s.src = "https://console.adscroller.com/loader.js";
+            d.getElementsByTagName('head')[0].appendChild(s);
+            w.adflex = {host: '//console.adscroller.com'};
+        }
+    })(document, window);
+</script>
+          </div>
+        </div>
+      
+      <div class="star-rating">
+        <label for="product2-star">&#9733;</label>
+        <label for="product2-star">&#9733;</label>
+        <label for="product2-star">&#9733;</label>
+        <label for="product2-star">&#9733;</label>
+        <label for="product2-star">&#9734;</label>
+      </div>
+      
+      
+      
+      <div class="product-image-container">
+      <div class="product-image">
+          <div class="adflexbox" id="acbe350ad0645cd6e4dd7a6972eaba060"></div>
+<script>
+    (function(d, w) {
+        if (!w.adflex) {
+            var s = d.createElement("script");
+            s.type = "text/javascript";
+            s.src = "https://console.adscroller.com/loader.js";
+            d.getElementsByTagName('head')[0].appendChild(s);
+            w.adflex = {host: '//console.adscroller.com'};
+        }
+    })(document, window);
+</script>
+          </div>
+        </div>
+      
+      <div class="star-rating">
+        <label for="product2-star">&#9733;</label>
+        <label for="product2-star">&#9733;</label>
+        <label for="product2-star">&#9733;</label>
+        <label for="product2-star">&#9733;</label>
+        <label for="product2-star">&#9734;</label>
+      </div>
+      
+    </div>
+    
+    
+      
+    
+  </div>
+
+  
+  
+</div>
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<div style="margin-top:8px;">
+    <button class="slider-button prev-button"><i class="fa fa-chevron-circle-left" aria-hidden="true"></i></button>
+<button class="slider-button next-button"><i class="fa fa-chevron-circle-right" aria-hidden="true"></i></button>
+</div>
+
+
+<style>
+
+  .fa-chevron-circle-left {
+    font-size:28px;
+    color:#111;
+  }
+  
+  .fa-chevron-circle-right {
+    font-size:28px;
+    color:#111;
+  }
+  
+  
+.product-image-container {
+    margin-top:10px;
+    width: 300px; 
+    height: 250px;
+    overflow: hidden;
+  }
+  
+  .product-image {
+    width: 99%;
+    height: 99%;
+    object-fit: cover;
+    object-position: center;
+  }
+  
+  
+
+  .slider-container {
+    width: 920px;
+    overflow: hidden;
+  }
+  
+@media (max-width: 767px) {
+  .slider-container {
+    width: 600px;
+  }
+}
+
+  .slider-track {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .slider-item {
+    flex: 0 0 200px;
+    margin-right: 10px;
+  }
+
+ .slider-button {
+    border-radius: 4px;
+    padding: 6px 10px;
+    font-size: 16px;
+    background-color: #f1f1f1;
+    border: 1px solid #ddd;
+    font-weight: 400;
+    color: #0c0c12;
+    cursor: pointer;
+}
+  
+  .star-rating {
+    position:absolute;
+    margin-top: 10px;
+    margin-left: 195px;
+    display: flex;
+    align-items: center;
+}
+
+  .star-rating label {
+    margin-top: -75px;
+    font-size: 22px;
+    color: gold;
+  }
+  
+  body {
+      background-color:transparent;
+  }
+  
+  .adflex-b-reset::after {
+    color: #fff;
+    margin-top: 3px;
+    font-family: sans-serif;
+    border-radius: 0px 5px 0px 5px;
+    padding: 5px;
+    margin-left: -29px;
+    font-weight:700;
+    content: "Ad";
+    position: absolute;
+    text-align: right;
+    font-size: 11px;
+    background: linear-gradient(90deg, rgba(66,77,87,0.4682247899159664) 0%, rgba(52,56,70,0.4766281512605042) 35%, rgba(47,58,68,0.4962359943977591) 100%);
+}
+
+.adflex-unit-vertical .body .button {
+    padding: 5px 10px !important;
+    font-size: 14px !important;
+}
+
+.adflex-unit-vertical .body {
+    background: linear-gradient(90deg, rgba(255, 188, 249, 0.259821) 0%, rgba(247, 144, 183, 0.25253851540616246) 35%, rgba(213, 158, 255, 0.17298669467787116) 100%) !important;
+    width: 100% !important;
+    height: 100px !important;
+    float: none !important;
+    padding: 5px 15px !important;
+}
+
+.adflex-unit-vertical .body:hover {
+    background: linear-gradient(90deg, rgba(198,228,252,0.4682247899159664) 0%, rgba(203,238,255,0.4766281512605042) 35%, rgba(205,231,255,0.4962359943977591) 100%) !important;
+    width: 100% !important;
+    height: 100px !important;
+    float: none !important;
+    padding: 5px 15px !important;
+}
+
+
+
+</style>
+
+
+  
+<script>
+  
+const prevButton = document.querySelector('.prev-button');
+const nextButton = document.querySelector('.next-button');
+const sliderTrack = document.querySelector('.slider-track');
+const sliderItems = document.querySelectorAll('.slider-item');
+
+let slideIndex = 0;
+let touchStartX = 0;
+let touchEndX = 0;
+
+prevButton.addEventListener('click', () => {
+  if (slideIndex > 0) {
+    slideIndex--;
+    slide();
+  }
+});
+
+nextButton.addEventListener('click', () => {
+  if (slideIndex < sliderItems.length - 1) {
+    slideIndex++;
+    slide();
+  }
+});
+
+sliderTrack.addEventListener('touchstart', (event) => {
+  touchStartX = event.touches[0].clientX;
+});
+
+sliderTrack.addEventListener('touchend', (event) => {
+  touchEndX = event.changedTouches[0].clientX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+  const swipeThreshold = 100;
+  const swipeDistance = touchEndX - touchStartX;
+
+  if (swipeDistance > swipeThreshold && slideIndex > 0) {
+    slideIndex--;
+  } else if (swipeDistance < -swipeThreshold && slideIndex < sliderItems.length - 1) {
+    slideIndex++;
+  }
+
+  slide();
+}
+
+function slide() {
+  const slidePosition = -slideIndex * 310;
+
+  sliderTrack.style.transition = 'transform 0.3s ease-in-out';
+  sliderTrack.style.transform = \`translateX(\${slidePosition}px)\`;
+  prevButton.disabled = slideIndex === 0;
+  nextButton.disabled = slideIndex === sliderItems.length - 1;
+
+  setTimeout(() => {
+    sliderTrack.style.transition = '';
+  }, 350);
+}
+  
+const intervalId = setInterval(() => {
+    const banners = document.querySelectorAll('.adflexbox');
+    if (banners.length > 0) {
+        clearInterval(intervalId); 
+        attachEventListeners();
+    }
+}, 500);
+
+function attachEventListeners() {
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            const parentItem = this.closest('.slider-item');
+            const banner = parentItem?.querySelector('.adflexbox');
+            if (banner) {
+                console.log('Banner clicked!');
+                banner.click();
+            } else {
+                console.warn('No banner found for button.');
+            }
+        });
+    });
+}
+
+
+</script>
+
+<script>
+    document.body.style.zoom = "83%";
+</script>
+</html>
+`;
