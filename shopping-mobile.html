@@ -308,11 +308,11 @@
   
   
 .product-image-container {
-    margin-top:10px;
-    width: 300px; 
-    height: 250px;
+    margin-top: 10px;
+    width: 140px;
+    height: 140px;
     overflow: hidden;
-  }
+}
   
   .product-image {
     width: 99%;
@@ -340,10 +340,14 @@
   }
 
   .slider-item {
-    flex: 0 0 200px;
+    flex: 0 0 300px;    /* 200px ছিল, 6 ad দেখানোর জন্য বাড়ানো হলো */
     margin-right: 10px;
-  }
 
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);  /* প্রতি row এ 2টি এলিমেন্ট */
+    grid-template-rows: repeat(3, auto);     /* মোট 3 row */
+    row-gap: 20px;                           /* row gap */
+}
  .slider-button {
     border-radius: 4px;
     padding: 6px 10px;
