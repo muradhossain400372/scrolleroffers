@@ -416,37 +416,94 @@
 
   
 <script>
+  
+const prevButton = document.querySelector('.prev-button');
+const nextButton = document.querySelector('.next-button');
+const sliderTrack = document.querySelector('.slider-track');
+const sliderItems = document.querySelectorAll('.slider-item');
 
-let index = 0;
-const track = document.querySelector('.slider-track');
-const items = document.querySelectorAll('.slider-item');
+let slideIndex = 0;
+let touchStartX = 0;
+let touchEndX = 0;
 
-function slide(){
-    track.style.transform = `translateX(-${index * 100}%)`;
+prevButton.addEventListener('click', () => {
+  if (slideIndex > 0) {
+    slideIndex--;
+    slide();
+  }
+});
+
+nextButton.addEventListener('click', () => {
+  if (slideIndex < sliderItems.length - 1) {
+    slideIndex++;
+    slide();
+  }
+});
+
+sliderTrack.addEventListener('touchstart', (event) => {
+  touchStartX = event.touches[0].clientX;
+});
+
+sliderTrack.addEventListener('touchend', (event) => {
+  touchEndX = event.changedTouches[0].clientX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+  const swipeThreshold = 100;
+  const swipeDistance = touchEndX - touchStartX;
+
+  if (swipeDistance > swipeThreshold && slideIndex > 0) {
+    slideIndex--;
+  } else if (swipeDistance < -swipeThreshold && slideIndex < sliderItems.length - 1) {
+    slideIndex++;
+  }
+
+  slide();
 }
 
-document.querySelector('.next').onclick = () => {
-    if(index < items.length - 1){ index++; slide(); }
-};
+function slide() {
+  const slidePosition = -slideIndex * 310;
 
-document.querySelector('.prev').onclick = () => {
-    if(index > 0){ index--; slide(); }
-};
+  sliderTrack.style.transition = 'transform 0.3s ease-in-out';
+  sliderTrack.style.transform = `translateX(${slidePosition}px)`;
+  prevButton.disabled = slideIndex === 0;
+  nextButton.disabled = slideIndex === sliderItems.length - 1;
 
-/* Swipe Support */
-let startX = 0;
-track.addEventListener("touchstart", e => startX = e.touches[0].clientX);
-track.addEventListener("touchend", e => {
-    let diff = e.changedTouches[0].clientX - startX;
-    if(diff > 80 && index > 0){ index--; slide(); }
-    if(diff < -80 && index < items.length - 1){ index++; slide(); }
-});
+  setTimeout(() => {
+    sliderTrack.style.transition = '';
+  }, 350);
+}
+  
+const intervalId = setInterval(() => {
+    const banners = document.querySelectorAll('.adflexbox');
+    if (banners.length > 0) {
+        clearInterval(intervalId); // Stop polling once banners are loaded
+        attachEventListeners();
+    }
+}, 500);
+
+function attachEventListeners() {
+    document.querySelectorAll('.add-to-cart').forEach(button => {
+        button.addEventListener('click', function (event) {
+            event.preventDefault();
+            const parentItem = this.closest('.slider-item');
+            const banner = parentItem?.querySelector('.adflexbox');
+            if (banner) {
+                console.log('Banner clicked!');
+                banner.click(); // Attempt click
+            } else {
+                console.warn('No banner found for button.');
+            }
+        });
+    });
+}
+
 
 </script>
 
-
 <script>
-    document.body.style.zoom = "83%";
+    document.body.style.zoom = "43%";
 </script>
 </html>
 
