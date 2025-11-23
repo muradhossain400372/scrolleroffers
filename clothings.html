@@ -232,11 +232,11 @@ body {
     transition: opacity ease-in 0.2s;
 }
 
-/* ===== GRID CONTAINER ===== */
+/* Desktop + Tablet = 2 columns */
 .affiliate-grid {
     display: grid;
     gap: 12px;
-    grid-template-columns: repeat(2, 1fr); /* Desktop & Tablet: 2 columns */
+    grid-template-columns: repeat(2, 1fr);
     align-items: start;
     margin: 0 auto;
     max-width: 1280px;
@@ -244,46 +244,37 @@ body {
     box-sizing: border-box;
 }
 
-/* ===== MOBILE (1 Column) ===== */
+/* Mobile = 1 column */
 @media (max-width: 768px) {
     .affiliate-grid {
-        grid-template-columns: 1fr !important; /* Mobile: 1 column */
+        grid-template-columns: 1fr !important;
     }
 }
 
-/* ===== GRID ITEM ===== */
+/* Grid item */
 .grid-item {
     position: relative;
     overflow: hidden;
-    border-radius: 0;
     width: 100%;
 }
 
-/* ===== RESPONSIVE AdFlex Fix ===== */
+/* AdFlex Responsive Fix */
 .adflex-unit,
 .adflexbox {
     width: 100% !important;
     max-width: 100% !important;
     min-width: 0 !important;
     height: auto !important;
-    padding: 0 !important;
     margin: 0 auto !important;
-    box-sizing: border-box !important;
+    padding: 0 !important;
     overflow: hidden !important;
+    box-sizing: border-box !important;
 }
 
-/* ===== Hide tracking pixels ===== */
+/* Hide tracking pixels */
 .grid-item img[width="1"][height="1"] {
     display: none !important;
 }
 
-
 </style>
 
-<script>
-if (window.innerWidth < 2000) {
-    document.body.style.transform = "scale(0.80)";
-    document.body.style.transformOrigin = "top center";
-    document.body.style.width = "100%";
-}
-</script>
