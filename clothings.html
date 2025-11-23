@@ -265,61 +265,10 @@ body {
     display: none !important;
 }
 
-/* ===== MOBILE RESPONSIVE ===== */
-@media (max-width: 768px) {
-    .affiliate-grid {
-        grid-template-columns: repeat(1, 1fr);
-        gap: 10px;
-        padding: 5px;
-    }
-}
-
-/* ===== SMALL PHONES ===== */
-@media (max-width: 420px) {
-    .affiliate-grid {
-        grid-template-columns: repeat(1, 1fr);
-    }
-    .adflex-unit {
-    position: relative !important;
-    margin: 0 auto !important;
-    width: 100% !important;
-    max-width: 728px !important;
-    min-width: 530px !important;
-    height: 200px !important;
-    /* background: #f3f3f3 !important; */
-    border-width: 1px !important;
-    border-style: solid !important;
-    /* border-color: #a8a8a8 !important; */
-    padding: 0 !important;
-    overflow: hidden !important;
-    box-sizing: border-box !important;
-    text-align: left !important;
-}
-}
-
 </style>
+
 <script>
-document.addEventListener("click", function (e) {
-
-    // user clicked on the button text or the button itself
-    if (e.target.classList.contains("view-btn")) {
-
-        e.preventDefault();
-        e.stopPropagation();
-        e.stopImmediatePropagation();
-
-        // find anchor link which contains the button
-        let link = e.target.closest("a");
-
-        if (link && link.href) {
-            window.open(link.href, "_blank");
-        }
-    }
-
-});
-</script>
-<script>
-if (window.innerWidth < 768) {
+if (window.innerWidth < 2000) {
     document.body.style.transform = "scale(0.50)";
     document.body.style.transformOrigin = "top center";
     document.body.style.width = "100%";
