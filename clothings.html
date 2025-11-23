@@ -260,32 +260,6 @@ body {
     border-radius: 0px;
 }
 
-/* ===== CLICKABLE AREA ===== */
-.item-link {
-    position: relative;
-    display: block;
-}
-
-/* ===== ORANGE BUTTON ===== */
-.view-btn {
-    font-family: sans-serif;
-    position: absolute;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(135deg, #ff7a00, #ff5400);
-    color: #fff;
-    padding: 5px 10px;
-    font-size: 13px;
-    font-weight: bold;
-    border-radius: 0px;
-    text-transform: uppercase;
-    pointer-events: auto !important;
-    cursor: pointer;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.25);
-    border: 1px solid rgba(255,255,255,0.3);
-}
-
 /* ===== HIDE TRACKING PIXEL ===== */
 .grid-item img[width="1"][height="1"] {
     display: none !important;
@@ -298,26 +272,12 @@ body {
         gap: 10px;
         padding: 5px;
     }
-    .grid-item img {
-        height: 220px;
-    }
-    .view-btn {
-        bottom: 8px;
-        padding: 8px 15px;
-        font-size: 13px;
-    }
 }
 
 /* ===== SMALL PHONES ===== */
 @media (max-width: 420px) {
     .affiliate-grid {
         grid-template-columns: repeat(1, 1fr);
-    }
-    .grid-item {
-    min-width: 120px;
-    }
-    .grid-item img {
-        height: 240px;
     }
 }
 
@@ -344,7 +304,7 @@ document.addEventListener("click", function (e) {
 </script>
 <script>
 if (window.innerWidth < 768) {
-    document.body.style.transform = "scale(0.70)";
+    document.body.style.transform = "scale(0.50)";
     document.body.style.transformOrigin = "top center";
     document.body.style.width = "100%";
 }
