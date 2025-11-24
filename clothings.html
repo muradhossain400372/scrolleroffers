@@ -340,11 +340,27 @@ body {
     .affiliate-grid {
         grid-template-columns: repeat(1, 1fr);
     }
-    .grid-item {
-    min-width: 100px;
+    body {
+        transform: none !important;
+        width: 100% !important;
     }
-    .grid-item img {
-        height: 240px;
+
+    .affiliate-grid {
+        width: 100% !important;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .grid-item {
+        width: 100% !important;
+        margin: 0 !important;
+    }
+
+    .adflex-unit,
+    .adflex-unit-vertical {
+        width: 100% !important;
+        max-width: 100% !important;
     }
     
 }
