@@ -260,31 +260,23 @@ body {
     border-radius: 0px;
 }
 
-/* ===== CLICKABLE AREA ===== */
-.item-link {
-    position: relative;
-    display: block;
+.adflex-unit-vertical .body .description {
+    line-height: 23px;
+    display: block !important;
 }
 
-/* ===== ORANGE BUTTON ===== */
-.view-btn {
-    font-family: sans-serif;
-    position: absolute;
-    bottom: 12px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: linear-gradient(135deg, #ff7a00, #ff5400);
-    color: #fff;
-    padding: 5px 10px;
-    font-size: 13px;
-    font-weight: bold;
-    border-radius: 0px;
-    text-transform: uppercase;
-    pointer-events: auto !important;
-    cursor: pointer;
-    box-shadow: 0 3px 8px rgba(0,0,0,0.25);
-    border: 1px solid rgba(255,255,255,0.3);
+.adflex-unit-vertical {
+    width: 300px !important;
+    height: 280px !important;
 }
+
+.adflex-unit-vertical .body {
+    width: 100% !important;
+    height: 140px !important;
+    float: none !important;
+    padding: 5px 15px !important;
+}
+    
 
 /* ===== HIDE TRACKING PIXEL ===== */
 .grid-item img[width="1"][height="1"] {
@@ -301,11 +293,7 @@ body {
     .grid-item img {
         height: 220px;
     }
-    .view-btn {
-        bottom: 8px;
-        padding: 8px 15px;
-        font-size: 13px;
-    }
+    
 }
 
 /* ===== SMALL PHONES ===== */
@@ -319,6 +307,7 @@ body {
     .grid-item img {
         height: 240px;
     }
+    
 }
 
 </style>
