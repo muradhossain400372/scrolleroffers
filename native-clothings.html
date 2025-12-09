@@ -1,3 +1,5 @@
+<div id="fullPageLoader">
+    <div class="spinner"></div>
 <section class="affiliate-grid">
 <div class="grid-item">
 <div class="adflexbox" id="acd1398a66e389e6dde5f0abb57bf036b"></div>
@@ -224,6 +226,7 @@
 </script>
 </div>    
 </section>
+  </div>  
 <style>
 
 body {
@@ -367,6 +370,41 @@ body {
     
 }
 
+/* ===== FULL PAGE LOADER ===== */
+#fullPageLoader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999999;
+    transition: opacity 0.5s ease-out, visibility 0.5s ease-out;
+}
+
+/* Loader Spinner */
+.spinner {
+    width: 60px;
+    height: 60px;
+    border: 6px solid #d1d1d1;
+    border-top-color: #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+/* Loader hide */
+#fullPageLoader.hide {
+    opacity: 0;
+    visibility: hidden;
+}
+   
 </style>
 
 
@@ -377,3 +415,37 @@ if (window.innerWidth < 2000) {
     wrapper.style.transformOrigin = "top center";
 }
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const adBoxes = document.querySelectorAll(".adflexbox");
+
+    const checkAdsLoaded = () => {
+        let loadedCount = 0;
+
+        adBoxes.forEach(box => {
+            if (box.innerHTML.trim() !== "") {
+                loadedCount++;
+            }
+        });
+
+        // সব অ্যাড লোড হলে loader hide করবে
+        if (loadedCount === adBoxes.length) {
+            document.getElementById("fullPageLoader").classList.add("hide");
+        }
+    };
+
+    // Observe ad content load
+    const observer = new MutationObserver(checkAdsLoaded);
+
+    adBoxes.forEach(box => {
+        observer.observe(box, { childList: true, subtree: true });
+    });
+
+    // fallback (যদি adscroller slow হয়)
+    setTimeout(() => {
+        document.getElementById("fullPageLoader").classList.add("hide");
+    }, 8000); // ৮ সেকেন্ড পরে জোর করে hide
+});
+</script>
+
